@@ -28,11 +28,22 @@ data class CrisisContact(
     val country: String?,
     val priority: Int?
 )
+data class EmergencyService(
+    val description: String?,
+    val number: String?
+)
 data class CrisisData(@SerializedName("crisis_hotlines") val crisisHotlines: List<CrisisContact>?)
+data class CrisisResources(
+    val country: String?,
+    @SerializedName("crisis_hotlines") val crisisHotlines: List<CrisisContact>?,
+    @SerializedName("online_resources") val onlineResources: List<CrisisContact>?,
+    @SerializedName("emergency_services") val emergencyServices: EmergencyService?
+)
 
 data class CrisisResponse(val success: Boolean,
-                          val message: String?,
-                          val data: CrisisData?)
+                         val message: String?,
+                         val resources: CrisisResources?)
+
 
 interface ApiService {
     @POST("api/chat/message") // for real time chat

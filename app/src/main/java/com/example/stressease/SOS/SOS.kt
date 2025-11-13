@@ -36,8 +36,8 @@ class SOS : AppCompatActivity() {
 
         // Example dropdown countries
         val countries = listOf("Select Country", "India", "USA", "UK", "Canada", "Australia")
-        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, countries)
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val spinnerAdapter = ArrayAdapter(this, R.layout.spinner_item_country ,countries)
+        spinnerAdapter.setDropDownViewResource(R.layout.spinner_drop_down)
         spinnerCountry.adapter = spinnerAdapter
 
         btnFetchContacts.setOnClickListener {
@@ -69,7 +69,7 @@ class SOS : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful && response.body() != null) {
 
-                        val contacts: List<CrisisContact> = response.body()?.data?.crisisHotlines ?: listOf()
+                        val contacts: List<CrisisContact> = response.body()?.resources?.crisisHotlines ?: emptyList()
 
                         Log.d("SOS", "Received ${contacts.size} contacts from Flask")
 

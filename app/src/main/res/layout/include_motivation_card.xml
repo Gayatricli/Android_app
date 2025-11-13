@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Header row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/emoji_muscle"
+            android:textSize="28sp"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/daily_motivation"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#1E40AF" />
+    </LinearLayout>
+
+    <!-- Motivational quote / AI text -->
+    <TextView
+        android:id="@+id/tvMotivation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/motivation_text"
+        android:textColor="#1E40AF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:lineSpacingExtra="6dp"
+        android:letterSpacing="0.02" />
+
+    <!-- Decorative sparkle or emoji -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/emoji_sparkle"
+        android:textSize="24sp"
+        android:layout_gravity="end"
+        android:layout_marginTop="8dp"
+        android:alpha="0.8"
+        tools:ignore="HardcodedText" />
+
+</LinearLayout>

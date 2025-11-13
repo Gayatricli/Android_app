@@ -12,30 +12,54 @@ data class ChatHistoryItem(
     val botReply: String,
     val timestamp: Long
 )
-class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
 
-    private val chatList = mutableListOf<ChatHistoryItem>()
+class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    inner class HistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val userText: TextView = itemView.findViewById(R.id.tvUserMessage)
-        val botText: TextView = itemView.findViewById(R.id.tvBotReply)
+    private val VIEW_TYPE_USER = 1
+    private val VIEW_TYPE_BOT = 2
+
+    private val chatItems = mutableListOf<Pair<Int, String>>() // (viewType, message)
+
+    override fun getItemViewType(position: Int): Int = chatItems[position].first
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return if (viewType == VIEW_TYPE_USER) {
+            val view = inflater.inflate(R.layout.item_chat_user, parent, false)
+            UserViewHolder(view)
+        } else {
+            val view = inflater.inflate(R.layout.item_chat_bot, parent, false)
+            BotViewHolder(view)
+        }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_chat_history, parent, false)
-        return HistoryViewHolder(view)
-    }
-    override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        val chat = chatList[position]
-        holder.userText.text = "You: ${chat.userMessage}"
-        holder.botText.text = "Bot: ${chat.botReply}"
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val (_, message) = chatItems[position]
+        if (holder is UserViewHolder) {
+            holder.userText.text = message
+        } else if (holder is BotViewHolder) {
+            holder.botText.text = message
+        }
     }
 
-    override fun getItemCount(): Int = chatList.size
+    override fun getItemCount(): Int = chatItems.size
 
-    fun setData(newData: List<ChatHistoryItem>) {
-        chatList.clear()
-        chatList.addAll(newData)
+    fun setData(pairedChats: List<ChatHistoryItem>) {
+        chatItems.clear()
+        for (chat in pairedChats) {
+            if (chat.userMessage.isNotBlank())
+                chatItems.add(VIEW_TYPE_USER to chat.userMessage)
+            if (chat.botReply.isNotBlank())
+                chatItems.add(VIEW_TYPE_BOT to chat.botReply)
+        }
         notifyDataSetChanged()
+    }
+
+    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val userText: TextView = itemView.findViewById(R.id.tvUserMessage)
+    }
+
+    inner class BotViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val botText: TextView = itemView.findViewById(R.id.tvBotMessage)
     }
 }

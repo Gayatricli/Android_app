@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".Settings.AboutApp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Our Mission" android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:lineSpacingMultiplier="1.2" android:text="We believe everyone deserves a safe, private, and supportive space to navigate their mental wellness. StressEase was created to be an intelligent companion on your journey, helping you build self-awareness and find moments of calm in your daily life."/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="The Team" android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Developed with care by Deep Shekhar, Gayatri Shriram and Guimond pierre Louis for our BSc Computer Science final year project."/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="Technology" android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Intelligently powered by Google Gemini and securely built on the Firebase platform."/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_horizontal" android:layout_marginTop="32dp" android:text="Version 1.0.0"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:layout_width="105dp"
+            android:layout_height="59dp"
+            android:layout_marginStart="129dp"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/bg_rounded_button"
+            android:text="Next"
+            android:textColor="@color/text_black" />
+    </LinearLayout>
+</ScrollView>

@@ -10,6 +10,7 @@ import com.example.stressease.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.Query
 
 
 class History: AppCompatActivity() {
@@ -19,6 +20,7 @@ class History: AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private var listenerRegistration: ListenerRegistration? = null
     private var userId: String = ""
+    private val chatList = mutableListOf<ChatHistoryItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +36,6 @@ class History: AppCompatActivity() {
             finish()
             return
         }
-
         // Setup RecyclerView
         recyclerView = findViewById(R.id.recyclerViewHistory)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -48,9 +49,9 @@ class History: AppCompatActivity() {
     private fun listenToUserHistory() {
         listenerRegistration = db.collection("users")
             .document(userId)
-            .collection("chatHistory")
-            .orderBy("timestamp")
-            .addSnapshotListener { snapshots, e ->
+            .collection("chats")
+            .orderBy("timestamp", Query.Direction.ASCENDING)
+            .addSnapshotListener{ snapshots, e ->
                 if (e != null) {
                     Log.e("HistoryActivity", "Error fetching data: ${e.message}")
                     Toast.makeText(this, "Error loading chats", Toast.LENGTH_SHORT).show()
@@ -58,23 +59,47 @@ class History: AppCompatActivity() {
                 }
 
                 if (snapshots != null && !snapshots.isEmpty) {
-                    val chatList = snapshots.map { doc ->
-                        ChatHistoryItem(
-                            userMessage = doc.getString("userMessage") ?: "",
-                            botReply = doc.getString("botReply") ?: "",
-                            timestamp = doc.getLong("timestamp") ?: 0L
-                        )
+                    chatList.clear() // Clear previous items
+
+                    for (doc in snapshots.documents) {
+                        val sender = doc.getString("sender")?.lowercase() ?: ""
+                        val message = doc.getString("message") ?: ""
+                        val timestamp = doc.getLong("timestamp") ?: 0L
+
+                        // Add each message as a new item
+                        if (sender == "user") {
+                            chatList.add(
+                                ChatHistoryItem(
+                                    userMessage = message,
+                                    botReply = "",
+                                    timestamp = timestamp
+                                )
+                            )
+                        } else if (sender == "bot") {
+                            chatList.add(
+                                ChatHistoryItem(
+                                    userMessage = "",
+                                    botReply = message,
+                                    timestamp = timestamp
+                                )
+                            )
+                        }
                     }
+
+                    // Update adapter once
                     adapter.setData(chatList)
+                    recyclerView.scrollToPosition(chatList.size - 1)
+
+                    Log.d("HistoryActivity", "Loaded ${chatList.size} messages")
                 } else {
                     adapter.setData(emptyList())
                 }
             }
     }
-
     override fun onDestroy() {
         super.onDestroy()
         listenerRegistration?.remove() // Stop Firestore updates
     }
 }
+
 

@@ -1,4 +1,4 @@
-package com.example.stressease.Leaderboard
+package com.example.stressease.Analytics
 
 import android.view.LayoutInflater
 import android.view.View
@@ -15,17 +15,20 @@ class LeaderboardAdapter(private val leaderboardList: List<LeaderboardEntry>) :
         val tvUsername: TextView = itemView.findViewById(R.id.tvUsername)
         val tvScore: TextView = itemView.findViewById(R.id.tvScore)
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeaderboardViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_leaderboard, parent, false)
         return LeaderboardViewHolder(view)
     }
+
     override fun onBindViewHolder(holder: LeaderboardViewHolder, position: Int) {
         val entry = leaderboardList[position]
         holder.tvRank.text = "#${position + 1}"
         holder.tvUsername.text = entry.username
         holder.tvScore.text = "Score: ${entry.score}"
     }
+
     override fun getItemCount(): Int{
         return leaderboardList.size
     }

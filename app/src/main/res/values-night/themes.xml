@@ -1,13 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-<!-- Base application theme. -->
+    <style name="Base.Theme.StressEase" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/freud_primary</item>
+        <item name="colorSecondary">@color/freud_secondary</item>
+        <item name="colorOnPrimary">@color/freud_white</item>
+        <item name="colorSurface">@color/freud_text_dark</item>
 
-        <!-- Dark mode theme -->
-        <style name="Base.Theme.StressEase" parent="Theme.Material3.DayNight.NoActionBar">
-            <item name="colorPrimary">@color/green_accent</item>
-            <item name="colorSecondary">@color/smiley_yellow</item>
-            <item name="android:statusBarColor">@color/green_accent</item>
-        </style>
-        <style name="Theme.StressEase" parent="Base.Theme.StressEase"/>
+        <item name="android:colorBackground">@color/freud_text_dark</item>
 
+        <item name="android:textColor">@color/freud_white</item>
+        <item name="android:statusBarColor">@color/freud_primary</item>
+        <item name="android:navigationBarColor">@color/freud_primary</item>
+        <item name="android:buttonStyle">@style/FreudPrimaryButton</item>
+        <item name="materialButtonStyle">@style/FreudPrimaryButton</item>
+    </style>
+
+    <style name="Theme.StressEase" parent="Base.Theme.StressEase" />
 </resources>

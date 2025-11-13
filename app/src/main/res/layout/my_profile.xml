@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".Settings.MyProfile.MyProfileFragment">
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp">
+            <ImageView android:id="@+id/avatar_image_view" android:layout_width="100dp" android:layout_height="100dp" android:layout_marginTop="32dp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" tools:src="@tools:sample/avatars"/>
+            <TextView android:id="@+id/name_text_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/avatar_image_view" tools:text="Sandra"/>
+            <TextView android:id="@+id/email_text_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/name_text_view" tools:text="sandra@example.com"/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/edit_button" style="@style/Widget.MaterialComponents.Button.TextButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Edit" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/goals_card" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginTop="32dp" app:cardCornerRadius="8dp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/email_text_view">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Your Goals" android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+                    <TextView android:id="@+id/your_goals_text_view" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:lineSpacingMultiplier="1.2" tools:text="- Reduce anxiety\n- Improve focus"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/stressors_card" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginTop="16dp" app:cardCornerRadius="8dp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/goals_card">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Your Recognized Stressors" android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+                    <TextView android:id="@+id/your_stressors_text_view" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:lineSpacingMultiplier="1.2" tools:text="- University exams\n- Finances"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

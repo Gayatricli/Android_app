@@ -1,144 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="@drawable/bg_chat_gradient">
 
-
-    <TextView
-        android:id="@+id/tvProgress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:text="@string/Question_1_of_10"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="8dp"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="40dp"
-        android:max="100"
-        android:progress="10"
-        android:progressDrawable="@drawable/progress_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.375"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvProgress" />
-
-    <TextView
-        android:id="@+id/tvQuestion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="36dp"
-        android:gravity="center"
-        android:text="I get upset easily over small things."
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressBar" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/answerCard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:padding="20dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:layout_constraintTop_toBottomOf="@id/tvQuestion"
-        app:layout_constraintBottom_toTopOf="@id/btnNext"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnNext"
-        android:layout_width="107dp"
-        android:layout_height="88dp"
-        android:backgroundTint="@color/teal_700"
-        android:text="Next"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:cornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.907"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/answerCard" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnback"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:backgroundTint="@color/teal_700"
-        android:text="Back"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:cornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.069"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/answerCard"
-        app:layout_constraintVertical_bias="0.54" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutQuiz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="288dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="20dp">
 
-        <RadioButton
-            android:id="@+id/opt1"
+        <!-- ======================= DECORATIVE BACKGROUND ELEMENTS ======================= -->
+        <ImageView
+            android:id="@+id/ivDecorTopLeft"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_blob_purple"
+            android:alpha="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivDecorTopRight"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_circles_group"
+            android:alpha="0.4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivDecorFlower"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_flower_shape"
+            android:alpha="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- ======================= CENTER SMILEY ======================= -->
+        <TextView
+            android:id="@+id/tvSmiley"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Never"
-            android:textSize="18sp" />
+            android:text="😊"
+            android:textSize="120sp"
+            android:alpha="0.35"
+            android:elevation="4dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <RadioButton
-            android:id="@+id/opt2"
+        <!-- ======================= QUIZ TITLE ======================= -->
+        <TextView
+            android:id="@+id/tvQuizTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sometimes"
-            android:textSize="18sp" />
+            android:text="Wellness Quiz 🧠"
+            android:textColor="#1e293b"
+            android:textStyle="bold"
+            android:textSize="32sp"
+            android:fontFamily="@font/ruby_dance"
+            android:shadowColor="#40000000"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="6"
+            app:layout_constraintTop_toBottomOf="@id/tvSmiley"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <RadioButton
-            android:id="@+id/opt3"
+        <!-- ======================= PROGRESS BAR ======================= -->
+        <LinearLayout
+            android:id="@+id/layoutProgressHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="32dp"
+            android:layout_marginHorizontal="24dp"
+            app:layout_constraintTop_toBottomOf="@id/tvQuizTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/tvProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Question 1 of 10"
+                android:textColor="#1e293b"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_gravity="center_horizontal" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:max="100"
+                android:progress="10"
+                android:progressDrawable="@drawable/progress_bar_orange" />
+        </LinearLayout>
+
+        <!-- ======================= CATEGORY BADGE ======================= -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvCategoryBadge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Often"
-            android:textSize="18sp" />
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:layout_constraintTop_toBottomOf="@id/layoutProgressHeader"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-        <RadioButton
-            android:id="@+id/opt4"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tvCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Emotional"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="8dp"
+                android:background="@drawable/bg_category_badge" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- ======================= QUESTION TEXT ======================= -->
+        <TextView
+            android:id="@+id/tvQuestion"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Always"
-            android:textSize="18sp" />
-    </RadioGroup>
+            android:text="Question will appear here."
+            android:textColor="#1e293b"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:lineSpacingExtra="6dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/cvCategoryBadge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- ======================= OPTIONS (NO RADIOGROUP) ======================= -->
+        <LinearLayout
+            android:id="@+id/optionsContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="28dp"
+            app:layout_constraintTop_toBottomOf="@id/tvQuestion"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingBottom="100dp"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- 4 Options -->
+            <include layout="@layout/layout_quiz_options" android:id="@+id/layoutOpt1"/>
+            <include layout="@layout/layout_quiz_options" android:id="@+id/layoutOpt2"/>
+            <include layout="@layout/layout_quiz_options" android:id="@+id/layoutOpt3"/>
+            <include layout="@layout/layout_quiz_options" android:id="@+id/layoutOpt4"/>
+            <include layout="@layout/layout_quiz_options" android:id="@+id/layoutOpt5"/>
+
+        </LinearLayout>
+
+
+        <!-- ================= NAVIGATION BUTTONS ================= -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/navigationButtons"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBack"
+                android:layout_width="0dp"
+                android:layout_height="66dp"
+                android:text="Back"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:singleLine="true"
+                app:cornerRadius="33dp"
+                app:icon="@drawable/ic_chevron_left"
+                app:iconTint="@android:color/white"
+                app:iconGravity="textStart"
+                app:iconPadding="10dp"
+                android:background="@drawable/bg_rounded_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnNext"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                android:layout_marginEnd="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNext"
+                android:layout_width="0dp"
+                android:layout_height="66dp"
+                android:text="Next"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:singleLine="true"
+                app:cornerRadius="33dp"
+                app:icon="@drawable/ic_chevron_right"
+                app:iconTint="@android:color/white"
+                app:iconGravity="textEnd"
+                app:iconPadding="10dp"
+                android:background="@drawable/bg_rounded_button"
+                app:layout_constraintStart_toEndOf="@id/btnBack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                android:layout_marginStart="8dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

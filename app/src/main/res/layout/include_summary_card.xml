@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Header with icon and label -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/emoji_drama"
+            android:textSize="28sp"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/emotional_state"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#64748B" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/today"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="#64748B"
+            android:background="@drawable/bg_number_badge"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp" />
+    </LinearLayout>
+
+    <!-- Divider line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/bg_celebration_glow"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Emotion label -->
+    <TextView
+        android:id="@+id/tvEmotion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dominant_emotion"
+        android:textColor="#1E293B"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:lineSpacingExtra="2dp" />
+
+    <!-- Summary description -->
+    <TextView
+        android:id="@+id/tvSummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:lineSpacingExtra="6dp"
+        android:text="@string/emotion_summary"
+        android:textColor="#475569"
+        android:textSize="16sp" />
+
+    <!-- Confidence indicator bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_streak_badge"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/emoji_chart"
+            android:textSize="20sp"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confidence_score"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#059669" />
+    </LinearLayout>
+
+</LinearLayout>

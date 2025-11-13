@@ -21,14 +21,14 @@ class LoginActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login_activity)
+        setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
 
-        emailInput = findViewById(R.id.etEmail)
-        passwordInput = findViewById(R.id.etPassword)
-        loginBtn = findViewById(R.id.btnLogin)
-        registerBtn = findViewById(R.id.btnRegister)
+        emailInput = findViewById(R.id.emailInputLayout)
+        passwordInput = findViewById(R.id.passwordInputLayout)
+        loginBtn = findViewById(R.id.loginButton)
+        registerBtn = findViewById(R.id.signUpText)
 
         pref=getSharedPreferences("AppPrefs", MODE_PRIVATE)
 
@@ -86,9 +86,11 @@ class LoginActivity: AppCompatActivity() {
                     Log.d("LoginActivity", "Token saved: $idToken")
 
                     Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                    
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                    window.decorView.post {
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    }
+
                 } else {
                     Toast.makeText(this, "Token fetch failed", Toast.LENGTH_SHORT).show()
                 }

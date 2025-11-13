@@ -1,4 +1,4 @@
-package com.example.stressease
+package com.example.stressease.Analytics
 
 import androidx.appcompat.app.AppCompatActivity
 

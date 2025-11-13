@@ -1,75 +1,662 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_chat_gradient"
-    android:padding="24dp">
+    android:fillViewport="true">
 
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/resultCard"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="12dp"
-        android:padding="24dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- BACKGROUND DECORATIVE LAYER -->
+
+        <!-- Gradient Blobs -->
+        <ImageView
+            android:id="@+id/decorBlobPurple"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:src="@drawable/ic_blob_purple"
+            android:alpha="0.20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:id="@+id/decorCirclesTop"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_circles_group"
+            android:alpha="0.25"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:id="@+id/decorFlowerLeft"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/ic_flower_shape"
+            android:alpha="0.20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="300dp"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:id="@+id/decorCirclesBottom"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_circles_group"
+            android:alpha="0.20"
+            android:rotation="45"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="800dp"
+            android:contentDescription="@null" />
+
+        <!-- Pink Hearts Background Layer -->
+        <TextView
+            android:id="@+id/decorSparkle1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="💗"
+            android:textSize="40sp"
+            android:alpha="0.40"
+            android:rotation="-15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="140dp"
+            android:layout_marginEnd="48dp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/decorSparkle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💗"
+            android:textSize="32sp"
+            android:alpha="0.35"
+            android:rotation="20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="500dp"
+            android:layout_marginStart="48dp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/decorHeart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💗"
+            android:textSize="40sp"
+            android:alpha="0.40"
+            android:rotation="10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="900dp"
+            android:layout_marginEnd="64dp"
+            tools:ignore="HardcodedText" />
+
+        <!-- Leaf Decorations Background Layer -->
+        <TextView
+            android:id="@+id/decorLeaf1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍃"
+            android:textSize="28sp"
+            android:alpha="0.35"
+            android:rotation="-20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="100dp"
+            android:layout_marginStart="10dp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/decorLeaf2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍃"
+            android:textSize="24sp"
+            android:alpha="0.40"
+            android:rotation="25"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="250dp"
+            android:layout_marginEnd="32dp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/decorLeaf3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍃"
+            android:textSize="26sp"
+            android:alpha="0.38"
+            android:rotation="-35"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="350dp"
+            android:layout_marginStart="20dp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/decorLeaf4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍃"
+            android:textSize="30sp"
+            android:alpha="0.35"
+            android:rotation="10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="600dp"
+            android:layout_marginEnd="8dp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/decorLeaf5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍃"
+            android:textSize="22sp"
+            android:alpha="0.40"
+            android:rotation="-15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="750dp"
+            android:layout_marginStart="40dp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/decorLeaf6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍃"
+            android:textSize="25sp"
+            android:alpha="0.37"
+            android:rotation="30"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="950dp"
+            android:layout_marginEnd="24dp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/decorLeaf7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍃"
+            android:textSize="20sp"
+            android:alpha="0.42"
+            android:rotation="-25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="550dp"
+            android:layout_marginStart="12dp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/decorLeaf8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍃"
+            android:textSize="22sp"
+            android:alpha="0.40"
+            android:rotation="15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="400dp"
+            android:layout_marginEnd="16dp"
+            tools:ignore="HardcodedText" />
+
+        <!-- Hidden Elements -->
+
+        <!-- CONTENT LAYER -->
+
+        <!-- Header Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/headerCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#F2FFFFFF"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="12dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#FFF7ED">
+
+                    <ImageButton
+                        android:id="@+id/btnBack"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_chevron_left"
+                        android:contentDescription="@string/back_button"
+                        app:tint="@color/orange_gradient_start" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AI Insights"
+                        android:textColor="#1E293B"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/permanent_marker"
+                        android:shadowColor="#40000000"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Personalized for you"
+                        android:textColor="#64748B"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#FFF7ED">
+
+                    <ImageButton
+                        android:id="@+id/btnSave"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_lightbulb"
+                        android:contentDescription="@string/save_button"
+                        app:tint="@color/orange_gradient_start" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Large Emoji Header - Using actual emoji character -->
+        <TextView
+            android:id="@+id/headerEmoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="😊"
+            android:textSize="96sp"
             android:gravity="center"
-            android:orientation="vertical">
+            app:layout_constraintTop_toBottomOf="@id/headerCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"
+            tools:ignore="HardcodedText" />
+
+        <!-- Title Section -->
+        <LinearLayout
+            android:id="@+id/titleContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/headerEmoji"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
-                android:id="@+id/tvFinalScore"
+                android:id="@+id/labelTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your Stress Score:     0 / 100"
-                android:textSize="30sp"
+                android:text="Your Insights"
+                android:textSize="28sp"
+                android:textColor="#1E293B"
+                android:fontFamily="@font/permanent_marker"
+                android:shadowColor="#40000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AI-Powered Analysis"
+                android:textSize="12sp"
+                android:textColor="#7C3AED"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="16dp"/>
+                android:background="@drawable/bg_celebration_badge"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:layout_marginTop="6dp" />
+        </LinearLayout>
+
+        <!-- Summary Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/summaryCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#F2FFFFFF"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/titleContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🎭"
+                        android:textSize="28sp"
+                        android:layout_marginEnd="8dp"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Emotional State"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#64748B"
+                        android:ellipsize="end"
+                        android:maxLines="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Today"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:textColor="#64748B"
+                        android:background="@drawable/bg_number_badge"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/bg_celebration_glow"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:id="@+id/tvEmotion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dominant Emotion"
+                    android:textColor="#1E293B"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:lineSpacingExtra="2dp" />
+
+                <TextView
+                    android:id="@+id/tvSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:lineSpacingExtra="6dp"
+                    android:text="You've been experiencing a balanced emotional state today. Your mood indicators show positive engagement with a sense of calm and focus."
+                    android:textColor="#475569"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_streak_badge"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📊"
+                        android:textSize="20sp"
+                        android:layout_marginEnd="8dp"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Confidence Score: 87%"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="#059669" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Motivation Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/motivationCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#DBEAFE"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/summaryCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="💪"
+                        android:textSize="28sp"
+                        android:layout_marginEnd="8dp"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Daily Motivation"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#1E40AF" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvMotivation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="You're making great progress! Remember that every small step counts towards your wellness journey. Keep nurturing your emotional health with mindful practices."
+                    android:textColor="#1E40AF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:lineSpacingExtra="6dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✨"
+                    android:textSize="24sp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Suggestions Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/suggestionCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#F2FFFFFF"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/motivationCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="💡"
+                        android:textSize="28sp"
+                        android:layout_marginEnd="8dp"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Personalized Tips"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#64748B"
+                        android:ellipsize="end"
+                        android:maxLines="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="For You"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:textColor="#7C3AED"
+                        android:background="@drawable/bg_number_badge"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/bg_celebration_glow"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:id="@+id/tvSuggestions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Take a 10-minute mindful breathing break\n• Journal about three things you're grateful for\n• Connect with a friend or loved one today\n• Engage in light physical activity you enjoy\n• Practice positive self-talk and affirmations"
+                    android:textColor="#1E293B"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="8dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_streak_badge"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✨ Start your wellness journey today"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#7C3AED" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Footer -->
+        <LinearLayout
+            android:id="@+id/footerContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="24dp"
+            android:padding="16dp"
+            android:background="@drawable/bg_streak_badge"
+            app:layout_constraintTop_toBottomOf="@id/suggestionCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
-                android:id="@+id/tvSuggestion"
+                android:id="@+id/footerNote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="💜 These insights are generated by AI based on your interactions.\nRemember to consult healthcare professionals for personalized advice."
+                android:textSize="11sp"
+                android:textColor="#64748B"
+                android:textStyle="bold"
                 android:gravity="center"
-                android:text="Suggestion will appear here"
-                android:textColor="@android:color/black"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:lineSpacingExtra="4dp" />
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
 
-    <Button
-        android:id="@+id/btnNext"
-        android:layout_width="128dp"
-        android:layout_height="78dp"
-        android:text="Next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.846" />
-
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="124dp"
-        android:layout_height="77dp"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.849" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

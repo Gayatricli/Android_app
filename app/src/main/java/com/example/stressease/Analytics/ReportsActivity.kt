@@ -1,12 +1,15 @@
-package com.example.stressease
+package com.example.stressease.Analytics
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.stressease.LocalStorageOffline.SharedPreference
 import com.example.stressease.LoginMain.MainActivity
+import com.example.stressease.R
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
@@ -16,7 +19,10 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ReportsActivity : AppCompatActivity() {
 
@@ -29,17 +35,16 @@ class ReportsActivity : AppCompatActivity() {
     private lateinit var btnBack: Button
     private lateinit var btnViewSummary: Button
     private lateinit var btnNext: Button
+
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.reports)
 
-        auth=FirebaseAuth.getInstance()
-        db= FirebaseFirestore.getInstance()
-
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
         // Bind views
         tvReportTitle = findViewById(R.id.tvReportTitle)
@@ -52,17 +57,6 @@ class ReportsActivity : AppCompatActivity() {
         btnViewSummary = findViewById(R.id.btnViewSummary)
         btnNext = findViewById(R.id.btnNext)
 
-        val moodList = SharedPreference.loadStringList(this, "moodLogs") // existing helper
-        val total = moodList.size
-        val positive = moodList.count { it == "Happy" || it == "Excited" }
-        val negative = moodList.count { it == "Sad" || it == "Angry" }
-        val neutral = total - positive - negative
-
-        saveAggregatedReport(total, positive, negative, neutral, moodList)
-
-        // Load and process data
-        loadReports()
-
         // Navigation
         btnBack.setOnClickListener { finish() }
         btnViewSummary.setOnClickListener {
@@ -71,51 +65,103 @@ class ReportsActivity : AppCompatActivity() {
         btnNext.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
+
+        // Fetch weekly user-specific reports
+        loadWeeklyUserReport()
     }
 
-    private fun loadReports() {
+    /**
+     * Fetches only last 7 days of data for the current user from Firestore.
+     * Combines mood logs and quiz scores into weekly summaries.
+     */
+    private fun loadWeeklyUserReport() {
+        val userId = auth.currentUser?.uid ?: return
+        val sevenDaysAgo = Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_YEAR, -7)
+        }.time
 
+        db.collection("users")
+            .document(userId)
+            .collection("moods")
+            .whereGreaterThan("timestamp", sevenDaysAgo)
+            .orderBy("timestamp", Query.Direction.ASCENDING)
+            .get()
+            .addOnSuccessListener { snapshot ->
+                if (snapshot.isEmpty) {
+                    tvReportStats.text = "No mood data found for this week ⚠️"
+                    Log.w("ReportsActivity", "No weekly mood data found.")
+                    return@addOnSuccessListener
+                }
 
-        val moodHistory = SharedPreference.loadStringList(this, "mood_history")
-        val chatHistory = SharedPreference.loadChatList(this, "chat_history")
+                val moodList = snapshot.documents.mapNotNull { it.getString("mood") }
+                val quizScores = snapshot.documents.mapNotNull { it.getDouble("quiz_score") }
 
-        val chatEmotionCounts = chatHistory.groupingBy { chatMsg ->
-            val msg = chatMsg.message ?: ""   // default empty string if null
-            when {
-                msg.contains("good", true) || msg.contains("happy", true) || msg.contains("great", true) -> "Positive"
-                msg.contains("bad", true) || msg.contains("sad", true) || msg.contains("angry", true) -> "Negative"
-                else -> "Neutral"
+                val total = moodList.size
+                val positive = moodList.count { it.equals("Happy", true) || it.equals("Calm", true) || it.equals("Excited", true) }
+                val negative = moodList.count { it.equals("Sad", true) || it.equals("Angry", true) || it.equals("Stressed", true) }
+                val neutral = total - positive - negative
+
+                val avgQuiz = if (quizScores.isNotEmpty()) quizScores.average() else 0.0
+
+                tvReportStats.text = """
+                    Weekly Summary (${SimpleDateFormat("MMM dd", Locale.getDefault()).format(sevenDaysAgo)} - Today)
+                    Total Entries: $total
+                    Positive: $positive
+                    Negative: $negative
+                    Neutral: $neutral
+                    Avg Quiz Score: ${String.format("%.1f", avgQuiz)}
+                """.trimIndent()
+
+                tvReportStatus.text = when {
+                    positive > negative && positive > neutral -> "You maintained a positive state this week 🎉"
+                    negative > positive && negative > neutral -> "This week was emotionally challenging 😟"
+                    else -> "Your week had mixed emotions ⚖️"
+                }
+
+                val counts = mapOf("Positive" to positive, "Negative" to negative, "Neutral" to neutral)
+                showEmotionBarChart(counts)
+                showMoodPieChart(counts)
+                showMoodTrendChart(moodList)
+
+                // Save weekly summary in Firestore for analytics
+                saveWeeklySummary(userId, total, positive, negative, neutral, avgQuiz, moodList)
             }
-        }.eachCount()
-
-        val moodCounts = moodHistory.groupingBy { mood ->
-            when (mood) {
-                "Happy", "Excited", "Calm" -> "Positive"
-                "Sad", "Angry", "Stressed" -> "Negative"
-                else -> "Neutral"
+            .addOnFailureListener { e ->
+                tvReportStats.text = "Failed to load weekly data ❌ ${e.message}"
+                Log.e("ReportsActivity", "Firestore error", e)
             }
-        }.eachCount()
+    }
 
-        val total = (chatEmotionCounts.values.sum() + moodCounts.values.sum())
-        val positive = (chatEmotionCounts["Positive"] ?: 0) + (moodCounts["Positive"] ?: 0)
-        val negative = (chatEmotionCounts["Negative"] ?: 0) + (moodCounts["Negative"] ?: 0)
-        val neutral = (chatEmotionCounts["Neutral"] ?: 0) + (moodCounts["Neutral"] ?: 0)
+    private fun saveWeeklySummary(
+        userId: String,
+        total: Int,
+        positive: Int,
+        negative: Int,
+        neutral: Int,
+        avgQuiz: Double,
+        moodList: List<String>
+    ) {
+        val summaryData = hashMapOf(
+            "totalMoods" to total,
+            "positiveCount" to positive,
+            "negativeCount" to negative,
+            "neutralCount" to neutral,
+            "averageQuizScore" to avgQuiz,
+            "last7DaysMood" to moodList,
+            "timestamp" to System.currentTimeMillis()
+        )
 
-        tvReportStats.text =
-            "Total Entries: $total\nPositive: $positive\nNegative: $negative\nNeutral: $neutral"
-
-        tvReportStatus.text = when {
-            positive > negative && positive > neutral -> "Status: You are mostly Positive 🎉"
-            negative > positive && negative > neutral -> "Status: You are mostly Negative 😟"
-            else -> "Status: Mixed Mood ⚖️"
-        }
-
-        val mergedCounts = mapOf("Positive" to positive, "Negative" to negative, "Neutral" to neutral)
-        if (total > 0) {
-            showEmotionBarChart(mergedCounts)
-            showMoodPieChart(mergedCounts)
-            showMoodTrendChart(moodHistory)
-        }
+        db.collection("users")
+            .document(userId)
+            .collection("reports")
+            .document("weekly_summary")
+            .set(summaryData, SetOptions.merge())
+            .addOnSuccessListener {
+                Log.d("ReportsActivity", "✅ Weekly summary saved.")
+            }
+            .addOnFailureListener { e ->
+                Log.e("ReportsActivity", "❌ Failed to save weekly summary: ${e.message}", e)
+            }
     }
 
     private fun showEmotionBarChart(emotionCounts: Map<String, Int>) {
@@ -125,23 +171,15 @@ class ReportsActivity : AppCompatActivity() {
             entries.add(BarEntry(index.toFloat(), count.toFloat()))
             index++
         }
+
         val dataSet = BarDataSet(entries, "Emotions")
         dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList()
-        dataSet.valueTextSize = 18f
+        dataSet.valueTextSize = 16f
 
         val data = BarData(dataSet)
-        data.barWidth = 0.6f
-
         emotionBarChart.data = data
-        emotionBarChart.setFitBars(true)
-        emotionBarChart.setDrawGridBackground(false)
         emotionBarChart.description = Description().apply { text = "" }
-        emotionBarChart.legend.apply {
-            textSize = 16f
-            formSize = 16f
-            horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-        }
-        emotionBarChart.animateY(1200)
+        emotionBarChart.animateY(1000)
         emotionBarChart.invalidate()
     }
 
@@ -150,92 +188,46 @@ class ReportsActivity : AppCompatActivity() {
         for ((emotion, count) in emotionCounts) {
             entries.add(PieEntry(count.toFloat(), emotion))
         }
-        val dataSet = PieDataSet(entries, "Moods")
+
+        val dataSet = PieDataSet(entries, "Mood Distribution")
         dataSet.colors = ColorTemplate.COLORFUL_COLORS.toList()
-        dataSet.valueTextSize = 20f
-        dataSet.sliceSpace = 3f
+        dataSet.valueTextSize = 18f
 
         val data = PieData(dataSet)
-        data.setValueTextSize(18f)
-
         moodPieChart.data = data
-        moodPieChart.setUsePercentValues(true)
-        moodPieChart.setDrawEntryLabels(true)
-        moodPieChart.setEntryLabelTextSize(16f)
         moodPieChart.description = Description().apply { text = "" }
-        moodPieChart.legend.apply {
-            textSize = 20f
-            formSize = 20f
-            horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-        }
-        moodPieChart.animateY(1200)
+        moodPieChart.animateY(1000)
         moodPieChart.invalidate()
     }
 
-    private fun showMoodTrendChart(moodHistory: List<String>) {
+    private fun showMoodTrendChart(moodList: List<String>) {
         val entries = ArrayList<Entry>()
-        for ((index, mood) in moodHistory.withIndex()) {
+        for ((index, mood) in moodList.withIndex()) {
             val value = when (mood) {
                 "Happy" -> 3f
+                "Calm" -> 2.5f
                 "Neutral" -> 2f
                 "Sad" -> 1f
-                "Angry" -> 0f
+                "Angry" -> 0.5f
                 else -> 2f
             }
             entries.add(Entry(index.toFloat(), value))
         }
 
-        val dataSet = LineDataSet(entries, "Mood Trend")
+        val dataSet = LineDataSet(entries, "Mood Trend (7 Days)")
         dataSet.colors = listOf(ColorTemplate.getHoloBlue())
         dataSet.circleColors = listOf(ColorTemplate.getHoloBlue())
-        dataSet.valueTextSize = 20f
+        dataSet.valueTextSize = 14f
         dataSet.lineWidth = 3f
-        dataSet.circleRadius = 5f
+        dataSet.circleRadius = 4f
 
         val data = LineData(dataSet)
-
         moodTrendChart.data = data
+        moodTrendChart.axisLeft.axisMinimum = 0f
+        moodTrendChart.axisLeft.axisMaximum = 3.5f
         moodTrendChart.description = Description().apply { text = "" }
-        moodTrendChart.legend.apply {
-            textSize = 20f
-            formSize = 16f
-            horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-        }
-        moodTrendChart.axisLeft.textSize = 14f
-        moodTrendChart.axisRight.textSize = 14f
-        moodTrendChart.xAxis.textSize = 14f
-
-        moodTrendChart.animateX(1200)
+        moodTrendChart.legend.textSize = 14f
+        moodTrendChart.animateX(1000)
         moodTrendChart.invalidate()
     }
-    private fun saveAggregatedReport(
-        total: Int,
-        positive: Int,
-        negative: Int,
-        neutral: Int,
-        moodHistory: List<String>
-    ) {
-        val userId = auth.currentUser?.uid ?: return
-        val reportData = hashMapOf(
-            "totalChats" to total,
-            "positiveCount" to positive,
-            "negativeCount" to negative,
-            "neutralCount" to neutral,
-            "last7DaysMood" to moodHistory.takeLast(7),
-            "lastUpdated" to System.currentTimeMillis()
-        )
-
-        db.collection("users")
-            .document(userId)
-            .collection("reports")
-            .document("summary")
-            .set(reportData, SetOptions.merge())
-            .addOnSuccessListener {
-                tvReportStats.append("\n\n[Synced to Cloud ✅]")
-            }
-            .addOnFailureListener {
-                tvReportStats.append("\n\n[Cloud Sync Failed ❌]")
-            }
-    }
-
 }

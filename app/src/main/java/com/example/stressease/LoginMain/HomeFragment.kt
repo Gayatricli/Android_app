@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.stressease.Chats.ChatFragment
+import com.example.stressease.chats.ChatActivity
 import com.example.stressease.History.History
 import com.example.stressease.MoodFragment
 import com.google.firebase.auth.FirebaseAuth
@@ -29,7 +29,6 @@ class HomeFragment: Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -39,14 +38,13 @@ class HomeFragment: Fragment() {
         btnChat = view.findViewById(R.id.btnChat)
         btnHistory = view.findViewById(R.id.btnHistory)
 
-        // Fetch logged-in user
-        val user = FirebaseAuth.getInstance().currentUser
-        val userName = user?.displayName ?: "User"
+
+        val uname= FirebaseAuth.getInstance()
+        val uname2=uname.currentUser?.email
 
         // Welcome message
-        tvWelcome.text = "Welcome, $userName 👋"
+        tvWelcome.text = "Welcome,user!!"
         tvSubtext.text = "How are you feeling today?"
-
         // Navigate to Mood fragment
         btnMood.setOnClickListener {
             parentFragmentManager.beginTransaction()
@@ -54,15 +52,11 @@ class HomeFragment: Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
-
         // Navigate to Chat fragment
         btnChat.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ChatFragment())
-                .addToBackStack(null)
-                .commit()
+            val intent = Intent(requireContext(), ChatActivity::class.java)
+            startActivity(intent)
         }
-
         // Navigate to History activity
         btnHistory.setOnClickListener {
             startActivity(Intent(requireContext(), History::class.java))

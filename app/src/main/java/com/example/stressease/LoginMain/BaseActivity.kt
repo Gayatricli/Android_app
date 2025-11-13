@@ -3,11 +3,11 @@ package com.example.stressease.LoginMain
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.stressease.Chats.ChatActivity
-import com.example.stressease.MoodActivity
+import com.example.stressease.chats.ChatActivity
+import com.example.stressease.MoodFragment
 import com.example.stressease.R
-import com.example.stressease.ReportsActivity
-import com.example.stressease.Suggestions
+import com.example.stressease.Analytics.ReportsActivity
+import com.example.stressease.Analytics.Suggestions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -23,7 +23,7 @@ class BaseActivity: AppCompatActivity() {
                     true
                 }
                 R.id.nav_mood -> {
-                    startActivity(Intent(this, MoodActivity::class.java))
+                    startActivity(Intent(this, MoodFragment::class.java))
                     true
                 }
                 R.id.nav_chat -> {

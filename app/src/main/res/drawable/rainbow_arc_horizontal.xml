@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="1000dp"
+    android:height="120dp"
+    android:viewportWidth="1000"
+    android:viewportHeight="120">
+
+    <!-- Red -->
+    <path
+        android:pathData="M0,100 Q500,20 1000,100"
+        android:strokeWidth="10"
+        android:strokeColor="#FF0000"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"/>
+
+    <!-- Orange -->
+    <path
+        android:pathData="M0,88 Q500,8 1000,88"
+        android:strokeWidth="10"
+        android:strokeColor="#FF7F00"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"/>
+
+    <!-- Yellow -->
+    <path
+        android:pathData="M0,76 Q500,-4 1000,76"
+        android:strokeWidth="10"
+        android:strokeColor="#FFFF00"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"/>
+
+    <!-- Green -->
+    <path
+        android:pathData="M0,64 Q500,-16 1000,64"
+        android:strokeWidth="10"
+        android:strokeColor="#00FF00"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"/>
+
+    <!-- Blue -->
+    <path
+        android:pathData="M0,52 Q500,-28 1000,52"
+        android:strokeWidth="10"
+        android:strokeColor="#0000FF"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"/>
+
+    <!-- Indigo -->
+    <path
+        android:pathData="M0,40 Q500,-40 1000,40"
+        android:strokeWidth="10"
+        android:strokeColor="#4B0082"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"/>
+
+    <!-- Violet -->
+    <path
+        android:pathData="M0,28 Q500,-52 1000,28"
+        android:strokeWidth="10"
+        android:strokeColor="#9400D3"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"/>
+</vector>

@@ -1,13 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="smiley_yellow">#FFD700</color>
-    <color name="text_black">#000000</color>
-    <color name="bubble_white">#FFFFFF</color>
-    <color name="chat_background">#FFF0F5</color>
+    <!-- 🎨 Brand Colors -->
+    <color name="freud_primary">#F17A2B</color> <!-- Bright orange -->
+    <color name="freud_secondary">#FFE3B0</color> <!-- Warm highlight -->
+    <color name="freud_accent">#FFF3E2</color> <!-- Soft background -->
+    <color name="freud_white">#FFFFFF</color>
+    <color name="freud_black">#000000</color>
+
+    <!-- 🧾 Text Colors -->
+    <color name="freud_text_dark">#3E2723</color>
+    <color name="freud_text_hint">#8C7B75</color>
+
+    <!-- 🧩 Surfaces & UI Elements -->
+    <color name="freud_card_bg">#FFF9F2</color>
+    <color name="freud_ripple_light">#33F17A2B</color> <!-- Transparent ripple -->
+    <color name="freud_surface_border">#FFE0C2</color>
+
+    <!-- 🎨 Supporting Colors -->
     <color name="light_grey">#D3D3D3</color>
-    <color name="teal_700">#00897B</color>
-    <color name="green_accent">#4CAF50</color>
-    <color name="teal_200">#00897B</color>
     <color name="purple_500">#6200EE</color>
-    <color name="white">#FFFFFF</color>
+    <color name="teal_700">#00897B</color>
+    <color name="teal_200">#80CBC4</color>
+
+    <!-- 🟢 Utility Colors -->
+    <color name="success_green">#4CAF50</color>
+    <color name="warning_yellow">#FFD700</color>
+    <color name="chat_background">#FFF0F5</color>
+
+    <color name="text_black">@color/freud_text_dark</color> <!-- Replaces missing text_black -->
+    <color name="bubble_white">@color/freud_white</color>
+
+    <color name="orange_gradient_start">#FF6B35</color>
+    <color name="orange_gradient_middle">#F7931E</color>
+    <color name="orange_gradient_end">#8B4513</color>
+
+    <color name="pink_light">#FCE4EC</color>
+    <color name="blue_light">#E1F5FE</color>
+    <color name="purple_light">#F3E5F5</color>
+
+    <color name="text_dark">#1E293B</color>
+    <color name="text_gray">#475569</color>
+    <color name="text_light">#64748B</color>
+
+    <color name="card_background">#FFFFFF</color>
+    <color name="card_background_alpha">#F2FFFFFF</color>
+
+    <color name="purple_decorative">#9C27B0</color>
+    <color name="blue_decorative">#64B5F6</color>
+    <color name="pink_decorative">#EC407A</color>
+
+    <color name="info_background">#E0F2FE</color>
+    <color name="info_text">#1D4ED8</color>
+    <color name="info_icon">#2563EB</color>
+    ```
+
 </resources>

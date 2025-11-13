@@ -22,11 +22,91 @@
     <string name="Typehowyoufeeltoday">Type your feelings</string>
     <string name="ConditionReport">Condition Report</string>
     <string name="status_you_are_mostly_positive">Status: You are mostly Positive 🎉</string>
+    <string name="login_title">login_title</string>
+    <string name="email_hint">email_hint</string>
+    <string name="password_hint">password_hint</string>
+    <string name="login_button">login_button</string>
+    <string name="signup_text">signup_text</string>
+    <string name="welcome_to_stressease">Welcome To StressEase</string>
+    <string name="Login">Login</string>
+    <string name="Register">Register</string>
+    <string name="login">LOGIN</string>
+    <string name="Password">Password</string>
+    <string name="Email">Email</string>
+    <string name="error_message">Error Message</string>
+    <string name="Your_Name">Your name</string>
+    <string name="Message">Message</string>
+    <string name="Send_Message">Send_message</string>
+    <string name="Subject">Subject</string>
+    <string name="your_name">name</string>
+    <string name="subject">subject</string>
+    <string name="message">message</string>
+    <string name="send_message">send_message</string>
+    <string name="text">text</string>
+    <string name="Text">Text</string>
+
     <string-array name="mood_options">
-        <item>Happy</item>
-        <item>Sad</item>
-        <item>Neutral</item>
-        <item>Angry</item>
-        <item>Excited</item>
+        <item>😊 Happy</item>
+        <item>😢 Sad</item>
+        <item>😰 Anxious</item>
+        <item>😌 Calm</item>
+        <item>😠 Angry</item>
+        <item>🤩 Excited</item>
+        <item>😴 Tired</item>
+        <item>😫 Stressed</item>
     </string-array>
+
+    <string name="rainbow_decoration">Rainbow decoration</string>
+    <string name="smiley_decoration">Smiley emoji decoration</string>
+    <string name="toggle_password_visibility">Toggle password visibility</string>
+    <string name="decor">decor</string>
+    <string name="option_text">Option Text</string>
+    <string name="tip_icon">tip_icon</string>
+    <string name="decorative_element">decorative_element</string>
+    <string name="trophy_icon">trophy_icon</string>
+    <string name="mood_tracker_title">Mood Tracker 💭</string>
+    <string name="mood_tracker_subtitle">How are you feeling today?</string>
+    <string name="mood_prompt">Choose how you\'re feeling...</string>
+    <string name="switch_to_quiz">Switch to Quiz</string>
+    <string name="select_your_mood">Select Your Mood</string>
+    <string name="analyze_mood">🎯 Analyze Mood</string>
+    <string name="analyzing">Analyzing...</string>
+    <string name="analysis_result">Analysis Result</string>
+    <string name="result_placeholder">Your mood analysis will appear here</string>
+    <string name="info_tip">Track your mood daily for better insights into your emotional patterns and mental wellness!</string>
+    <string name="btn_back">← Back</string>
+    <string name="btn_next">Next →</string>
+    <string name="mood_happy">Great to see you\'re in a positive mood! Keep up the good energy. Consider journaling about what made you happy today.</string>
+    <string name="mood_sad">It\'s okay to feel sad sometimes. Remember, this feeling is temporary. Consider talking to someone you trust or trying a relaxing activity.</string>
+    <string name="mood_anxious">Anxiety can be challenging. Try some deep breathing exercises. Focus on what you can control, and take things one step at a time.</string>
+    <string name="mood_calm">Wonderful! You\'re in a peaceful state. This is a great time for reflection or creative activities. Maintain this balance!</string>
+    <string name="mood_angry">Feeling angry is natural. Try to identify what triggered this emotion. Physical activity or expressing yourself through art can help.</string>
+    <string name="mood_excited">Your enthusiasm is contagious! Channel this energy into something productive. Just remember to also take time to rest.</string>
+    <string name="mood_tired">Your body might be telling you to rest. Make sure you\'re getting enough sleep and staying hydrated. Take a break if you can.</string>
+    <string name="mood_stressed">Stress affects us all. Prioritize your tasks, take short breaks, and don\'t hesitate to ask for help. You\'ve got this!</string>
+    <string name="back_button">back_button</string>
+    <string name="ai_insights">ai_insights</string>
+    <string name="personalized_for_you">personalized_suggestions</string>
+    <string name="save_button">save_button</string>
+    <string name="emoji_smile">emoji</string>
+    <string name="your_insights">Your Insights</string>
+    <string name="ai_powered_analysis">AI Analysis</string>
+    <string name="emoji_drama">Emoji Drama</string>
+    <string name="emotional_state">Emotional State</string>
+    <string name="today">Today</string>
+    <string name="dominant_emotion">Dominant Emotion</string>
+    <string name="emotion_summary">Emotion Summary</string>
+    <string name="emoji_chart">Emoji Chart</string>
+    <string name="confidence_score">Confidence Score</string>
+    <string name="footer_text">Footer Text</string>
+    <string name="start_wellness_journey">Start Wellness Journey</string>
+    <string name="suggestions_text">Suggestions Text</string>
+    <string name="for_you">For you</string>
+    <string name="personalized_tips">Personalized Tips</string>
+    <string name="emoji_bulb">Emoji Bulb</string>
+    <string name="emoji_sparkle">Emoji Sparkle</string>
+    <string name="motivation_text">Motivation Text</string>
+    <string name="daily_motivation">Daily motivation</string>
+    <string name="emoji_muscle">Emoji Muscle</string>
+
 </resources>

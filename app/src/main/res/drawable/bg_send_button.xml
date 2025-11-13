@@ -3,7 +3,7 @@
     android:shape="oval">
 
     <!-- Button background color -->
-    <solid android:color="@color/green_accent"/>
+    <solid android:color="@color/teal_200"/>
 
     <!-- Optional shadow-like effect -->
     <size android:width="48dp" android:height="48dp"/>

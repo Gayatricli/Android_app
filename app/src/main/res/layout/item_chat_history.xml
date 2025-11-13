@@ -1,25 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:background="@drawable/bg_chat_gradient"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    android:background="@android:color/white">
 
-    <TextView
-        android:id="@+id/tvUserMessage"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#222"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/white">
 
-    <TextView
-        android:id="@+id/tvBotReply"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#555"
-        android:textSize="15sp"
-        android:paddingTop="4dp" />
-</LinearLayout>
+        <!-- User Message Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <!-- User Icon -->
+            <FrameLayout
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/ic_circle_orange_light">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="👤"
+                    android:textSize="18sp" />
+            </FrameLayout>
+
+            <!-- User Message Text -->
+            <TextView
+                android:id="@+id/tvUserMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#1e293b"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:lineSpacingExtra="2dp" />
+        </LinearLayout>
+
+        <!-- Divider Line with Gradient -->
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_vertical_gradient_orange" />
+
+        <!-- Bot Reply Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="0dp">
+
+            <!-- Bot Icon -->
+            <FrameLayout
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/ic_circle_blue_light">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="🤖"
+                    android:textSize="18sp" />
+            </FrameLayout>
+
+            <!-- Bot Reply Text -->
+            <TextView
+                android:id="@+id/tvBotReply"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#475569"
+                android:textSize="15sp"
+                android:lineSpacingExtra="2dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,3 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
+
+    <!-- 🌙 Base App Theme -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_chat_gradient</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">#1E293B</item>
+
+        <!-- 🎨 Material Color Tokens -->
+        <item name="colorPrimary">@color/freud_primary</item>
+        <item name="colorPrimaryContainer">@color/freud_secondary</item>
+        <item name="colorOnPrimary">@color/freud_white</item>
+        <item name="colorSecondary">@color/freud_secondary</item>
+        <item name="colorOnSecondary">@color/freud_white</item>
+        <item name="android:colorBackground">@color/freud_accent</item>
+        <item name="colorSurface">@color/freud_accent</item>
+
+        <!-- 🌐 Global Button Override -->
+        <item name="android:buttonStyle">@style/FreudPrimaryButton</item>
+        <item name="materialButtonStyle">@style/FreudPrimaryButton</item>
+    </style>
+
+
+    <!-- 🔘 No Tint Button Theme -->
+    <style name="NoTintButtonTheme" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:backgroundTint">@null</item>
+        <item name="android:textColor">@color/freud_primary</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="rippleColor">@android:color/transparent</item>
+    </style>
+
+
+    <!-- 🎨 Freud Primary Gradient Button (Used Globally Across App) -->
+
+    <style name="FreudPrimaryButton" parent="Widget.MaterialComponents.Button">
+        <!-- Use drawable directly -->
+        <item name="android:background">@drawable/bg_primary_button_gradient</item>
+
+        <!-- Disable tint overrides -->
+        <item name="android:backgroundTint">@null</item>
+        <item name="backgroundTint">@null</item>
+        <item name="rippleColor">@android:color/transparent</item>
+
+        <!-- Typography -->
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+
+        <!-- Shape + Elevation -->
+        <item name="cornerRadius">28dp</item>
+        <item name="android:elevation">6dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+
+
+    <!-- 🎨 Freud Secondary Outlined Button -->
+    <style name="FreudSecondaryButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/freud_primary</item>
+        <item name="strokeColor">@color/freud_primary</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">28dp</item>
+    </style>
+
+
+    <!-- ✏️ Marker Headings -->
+    <style name="MarkerHeadingText">
+        <item name="android:fontFamily">@font/permanent_marker</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <!-- 💬 Subheadings -->
+    <style name="SubHeadingText">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">#475569</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+
+    <!-- 📄 Body Text -->
+    <style name="BodyText">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">#1E293B</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+
+    <!-- ✨ Playful App Title -->
+    <style name="PlayfulTitle">
+        <item name="android:fontFamily">@font/ruby_dance</item>
+        <item name="android:textColor">#7C3AED</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <!-- 🧠 RoundedButton (Legacy Support → Now Uses Gradient) -->
+    <style name="RoundedButton" parent="@style/FreudPrimaryButton" />
+
+
+    <!-- 🧩 Rounded EditText -->
+    <style name="RoundedEditText">
+        <item name="android:background">@drawable/input_background</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">#1E293B</item>
+        <item name="android:textColorHint">#64748B</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+
+    <!-- 📦 Card Style -->
+    <style name="CardStyle">
+        <item name="android:background">@drawable/rounded_bg</item>
+        <item name="android:elevation">6dp</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:radius">20dp</item>
+    </style>
+
+
+    <!-- 🌤️ Custom Toast -->
+    <style name="CustomToastStyle">
+        <item name="android:background">@drawable/toast_background</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

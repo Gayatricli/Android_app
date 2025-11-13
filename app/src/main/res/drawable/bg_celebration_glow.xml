@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Celebration Glow Effect -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <gradient
+        android:type="radial"
+        android:gradientRadius="60dp"
+        android:startColor="#80FFA726"
+        android:centerColor="#40FFA726"
+        android:endColor="#00FFA726" />
+</shape>

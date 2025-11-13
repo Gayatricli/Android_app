@@ -1,12 +1,18 @@
 package com.example.stressease.LoginMain
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.stressease.Chats.ChatFragment
+import com.example.stressease.Analytics.ReportsActivity
+import com.example.stressease.chats.ChatActivity
 import com.example.stressease.MoodFragment
 import com.example.stressease.R
+import com.example.stressease.Settings.SettingsActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,10 +26,12 @@ class MainActivity : AppCompatActivity() {
         bottomNav = findViewById(R.id.bottom_navigation)
 
         // Default to home
-        loadFragment(HomeFragment())
-        bottomNav.selectedItemId = R.id.nav_home
+        Handler(Looper.getMainLooper()).post {
+            loadFragment(HomeFragment()) // or Splash/Home
+            bottomNav.selectedItemId = R.id.nav_home
 
-        // ✅ Handle first-time selection
+        }
+        //  Handle first-time selection
         bottomNav.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_home -> {
@@ -37,7 +45,20 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_chat -> {
-                    loadNewChatFragment() // ✅ Create brand new ChatFragment
+                    val chat1 = Intent(this, ChatActivity::class.java)
+                    startActivity(chat1)
+                    true
+                }
+
+                R.id.nav_analytics -> {
+                    val act = Intent(this, ReportsActivity::class.java)
+                    startActivity(act)
+                    true
+                }
+
+                R.id.nav_settings -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    startActivity(intent)
                     true
                 }
 
@@ -51,32 +72,20 @@ class MainActivity : AppCompatActivity() {
                 loadNewChatFragment() // Recreate ChatFragment again
             }
         }
+
     }
 
     // ✅ Always creates a new ChatFragment (clean chat)
     private fun loadNewChatFragment() {
-        val fm = supportFragmentManager
+        val intent = Intent(this, ChatActivity::class.java)
+        intent.putExtra("isNewSession", true)
 
-        // Remove any existing ChatFragment instantly
-        val existing = fm.findFragmentByTag(CHAT_TAG)
-        if (existing != null) {
-            fm.beginTransaction().remove(existing).commitNowAllowingStateLoss()
-        }
+        // Clear the current ChatActivity if it's already open and start fresh
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 
-        // Create and add a new ChatFragment with isNewSession flag
-        val newChatFragment = ChatFragment().apply {
-            arguments = Bundle().apply {
-                putBoolean("isNewSession", true)
-            }
-        }
-
-        fm.beginTransaction()
-            .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-            .replace(R.id.fragment_container, newChatFragment, CHAT_TAG)
-            .commit()
     }
-
-    // ✅ Generic fragment loader for other tabs
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)

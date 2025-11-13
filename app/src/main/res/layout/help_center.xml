@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".Settings.HelpCenter.HelpCenterFragment">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+            <TextView android:id="@+id/faq_question_1" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" android:padding="16dp" android:text="How does the mood quiz work?" android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" app:drawableEndCompat="@drawable/ic_keyboard_arrow_down"/>
+            <TextView android:id="@+id/faq_answer_1" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingBottom="16dp" android:text="The mood quiz is a series of questions designed to help you reflect on your current emotional state. Your answers are private and are used to provide you with personalized suggestions." android:visibility="gone"/>
+            <TextView android:id="@+id/faq_question_2" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" android:padding="16dp" android:text="Is my data private?" android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" app:drawableEndCompat="@drawable/ic_keyboard_arrow_down"/>
+            <TextView android:id="@+id/faq_answer_2" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingBottom="16dp" android:text="Yes, your data is kept private and is not shared with third parties. For more information, please see our Privacy Policy." android:visibility="gone"/>
+            <TextView android:id="@+id/faq_question_3" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" android:padding="16dp" android:text="How do I change my theme?" android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" app:drawableEndCompat="@drawable/ic_keyboard_arrow_down"/>
+            <TextView android:id="@+id/faq_answer_3" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingBottom="16dp" android:text="You can change the theme of the app in the settings screen. You can choose between a light theme and a dark theme." android:visibility="gone"/>
+            <TextView android:id="@+id/faq_question_4" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" android:padding="16dp" android:text="How does the StressBot work?" android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" app:drawableEndCompat="@drawable/ic_keyboard_arrow_down"/>
+            <TextView android:id="@+id/faq_answer_4" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingBottom="16dp" android:text="The StressBot is a chatbot that you can talk to about your stress and anxiety. It is designed to provide you with support and coping strategies." android:visibility="gone"/>
+            <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="32dp" app:cardCornerRadius="8dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Contact Support" android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Still have questions? Our team is here to help."/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/email_us_button"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="187dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Email Us" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

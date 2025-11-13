@@ -1,7 +1,7 @@
 package com.example.stressease.LocalStorageOffline
 
 import android.content.Context
-import com.example.stressease.Chats.ChatMessage
+import com.example.stressease.chats.ChatMessage
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

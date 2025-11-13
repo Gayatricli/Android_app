@@ -13,34 +13,37 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.StressEase"
+        android:enableOnBackInvokedCallback="true"
         tools:replace="android:appComponentFactory"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".LoginMain.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Leaderboard"
+        <activity android:name=".Analytics.Leaderboard"
               android:exported="true"/>
-        <activity android:name=".MainActivity"
+        <activity android:name=".chats.ChatActivity"
             android:exported="true"/>
-        <activity android:name=".QuizActivity"
+        <activity android:name=".Analytics.ReportsActivity"
             android:exported="true"/>
-        <activity android:name=".MoodActivity"
+        <activity android:name=".Analytics.Suggestions"
             android:exported="true"/>
-        <activity android:name=".ReportsActivity"
+        <activity android:name=".Analytics.Summary"
             android:exported="true"/>
-        <activity android:name=".Suggestions"
+
+        <activity android:name=".SOS.SOS"
             android:exported="true"/>
-        <activity android:name=".Summary"
+        <activity android:name=".History.History"
             android:exported="true"/>
-        <activity android:name=".ChatActivity"
+        <activity android:name=".Analytics.ResourceHub"
             android:exported="true"/>
-        <activity android:name=".SOS"
+        <activity android:name=".LoginMain.MainActivity"
             android:exported="true"/>
     </application>
 

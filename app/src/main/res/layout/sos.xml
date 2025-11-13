@@ -1,78 +1,351 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutSOS"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="16dp">
+    android:background="@drawable/bg_chat_gradient"
+    android:padding="20dp"
+    tools:context=".SOS.SOS">
 
+    <!-- Decorative Background Elements -->
+    <ImageView
+        android:id="@+id/ivDecorTopLeft"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:alpha="0.3"
+        android:contentDescription="Decorative element"
+        android:src="@drawable/ic_blob_purple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivDecorTopRight"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="24dp"
+        android:alpha="0.4"
+        android:contentDescription="Decorative element"
+        android:src="@drawable/ic_circles_group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivDecorFlower"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="4dp"
+        android:alpha="0.4"
+        android:contentDescription="Decorative element"
+        android:src="@drawable/ic_flower_shape"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- SOS Emoji -->
+    <TextView
+        android:id="@+id/tvEmojiSOS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:alpha="0.5"
+        android:elevation="4dp"
+        android:text="🆘"
+        android:textSize="80sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Smiley Emoji -->
+    <TextView
+        android:id="@+id/tvSmiley"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:alpha="0.4"
+        android:elevation="4dp"
+        android:text="😊"
+        android:textSize="120sp"
+        app:layout_constraintTop_toBottomOf="@id/tvEmojiSOS"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:elevation="4dp"
+        android:fontFamily="@font/permanent_marker"
+        android:shadowColor="#40000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"
+        android:text="Crisis Support"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tvSmiley"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:elevation="4dp"
+        android:text="Help is available 24/7"
+        android:textAlignment="center"
+        android:textColor="#475569"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Scrollable Content -->
     <ScrollView
-        android:id="@+id/scrollViewSOS"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toTopOf="parent"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:padding="16dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
 
-            <!-- Title -->
+            <!-- Country Label -->
             <TextView
-                android:id="@+id/tvCrisisTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Crisis Support"
-                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"
+                android:elevation="4dp"
+                android:text="Select Your Country:"
                 android:textColor="@android:color/black"
-                android:textSize="22sp"
-                android:layout_marginBottom="20dp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-            <!-- Country label -->
-            <TextView
-                android:text="Your Country:"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@color/text_black"
-                android:layout_marginBottom="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <!-- Country dropdown -->
+            <!-- Spinner -->
             <Spinner
                 android:id="@+id/spinnerCountry"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_height="48dp"
                 android:background="@drawable/rounded_bg"
-                android:minHeight="48dp"
-                android:padding="8dp" />
+                android:paddingStart="16dp"
+                android:paddingEnd="10dp"
+                android:spinnerMode="dropdown"
+                android:elevation="4dp" />
 
-            <!-- Warning text -->
-            <TextView
+            <!-- Info Card -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:lineSpacingExtra="4dp"
-                android:text="If you are in immediate danger, please call your local emergency number. The resources below are available for immediate, confidential support."
-                android:textColor="@android:color/holo_red_light"
-                android:textSize="14sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp"
+                android:background="@drawable/bg_rounded_button_orange">
 
-            <!-- Contact list -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="@drawable/bg_red_gradient">
+
+                    <TextView
+                        android:id="@+id/tvInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="If you are in immediate danger, please call your local emergency number. The resources below are available for confidential support."
+                        android:textAlignment="center"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Fetch Button -->
+            <Button
+                android:id="@+id/btnFetchContacts"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_rounded_button_orange"
+                android:paddingHorizontal="24dp"
+                android:text="Fetch Crisis Contacts"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:elevation="8dp"
+                android:stateListAnimator="@null" />
+
+            <!-- RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSOSContacts"
                 android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:scrollbars="vertical"
+                android:nestedScrollingEnabled="true"
+                android:elevation="4dp" />
+
+            <!-- Status Text -->
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:overScrollMode="never" />
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="16dp"
+                android:text="Click &quot;Fetch Crisis Contacts&quot; to load resources"
+                android:textAlignment="center"
+                android:textColor="#64748b"
+                android:textSize="14sp"
+                android:visibility="visible" />
+
+            <!-- Calming Techniques Header -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp"
+                android:text="Calming Techniques"
+                android:textAlignment="center"
+                android:textColor="#1e293b"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Technique Card 1 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <FrameLayout
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/ic_circle_blue_light">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="Deep breathing icon"
+                            android:src="@drawable/ic_wind"
+                            app:tint="#3b82f6" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Deep Breathing"
+                            android:textColor="#1e293b"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="4-7-8 breathing technique"
+                            android:textColor="#64748b"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Technique Card 2 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <FrameLayout
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/ic_circle_pink_light">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="Grounding exercise icon"
+                            android:src="@drawable/ic_heart"
+                            app:tint="#ec4899" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Grounding Exercise"
+                            android:textColor="#1e293b"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="5-4-3-2-1 sensory technique"
+                            android:textColor="#64748b"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 

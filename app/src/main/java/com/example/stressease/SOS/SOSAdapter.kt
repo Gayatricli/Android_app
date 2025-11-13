@@ -12,7 +12,6 @@ import com.example.stressease.R
 
 class SOSAdapter: RecyclerView.Adapter<SOSAdapter.ViewHolder>(){
 
-
     private var contacts: List<CrisisContact> = emptyList()
 
     fun setData(list: List<CrisisContact>?) {
@@ -44,7 +43,6 @@ class SOSAdapter: RecyclerView.Adapter<SOSAdapter.ViewHolder>(){
     }
 
     override fun getItemCount() = contacts.size
-
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.tvSOSName)
         val number: TextView = itemView.findViewById(R.id.tvSOSNumber)

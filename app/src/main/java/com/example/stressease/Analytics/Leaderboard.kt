@@ -1,4 +1,4 @@
-package com.example.stressease.Leaderboard
+package com.example.stressease.Analytics
 
 
 import android.os.Bundle
@@ -29,7 +29,6 @@ class Leaderboard : AppCompatActivity() {
 
         loadLeaderboard()
     }
-
     private fun loadLeaderboard() {
         db.collection("users")
             .orderBy(

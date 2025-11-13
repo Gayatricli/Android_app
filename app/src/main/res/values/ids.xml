@@ -14,4 +14,12 @@
     <item name="moodPieChart" type="id"/>
     <item name="emotionBarChart" type="id"/>
     <item name="moodTrendChart" type="id"/>
+    <item name="recyclerViewHistory" type="id"/>
+    <item name="loginButton" type="id"/>
+    <item name="signUpText" type="id"/>
+    <item name="lineChartCard" type="id"/>
+    <item name="pieChartCard" type="id"/>
+    <item name="barChartCard" type="id"/>
+    <item name="include_suggestion_card" type="id"/>
+
 </resources>
