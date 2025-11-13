@@ -11,7 +11,9 @@ import kotlinx.coroutines.flow.first
 class SettingsRepository(private val context: Context) {
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
-    private val dataStore = SettingsDataStore(context)
+
+    private val dataStore: SettingsDataStore = SettingsDataStore(context)
+
 
     private fun userDocPath(): Pair<String, String>? {
         val uid = auth.currentUser?.uid ?: return null
@@ -150,5 +152,14 @@ class SettingsRepository(private val context: Context) {
         } catch (e: Exception) {
             Pair(false, "Import parse error: ${e.message}")
         }
+        // SettingsRepository.kt (inside class SettingsRepository)
+
+
+        // add this public method
+
+
+    }
+    suspend fun clearLocal() {
+        dataStore.clear()
     }
 }

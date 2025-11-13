@@ -101,7 +101,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
     fun clearLocalCache() {
         viewModelScope.launch {
-            repo.dataStore.clear()
+            repo.clearLocal()
             _uiState.value = SettingsModel()
         }
     }
