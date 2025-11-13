@@ -1,4 +1,4 @@
-package com.example.stressease.Chats
+package com.example.stressease.chats
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.stressease.R
 
 class ChatAdapter(private val messages: List<ChatMessage>):
+
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val VIEW_TYPE_USER = 1
         private val VIEW_TYPE_BOT = 2
@@ -45,7 +46,14 @@ class ChatAdapter(private val messages: List<ChatMessage>):
             private val tvMessage: TextView = itemView.findViewById(R.id.tvBotMessage)
             fun bind(message: ChatMessage) {
                 tvMessage.text = message.text
+
+                if (message.emotion == "error") {
+                    tvMessage.setBackgroundResource(R.drawable.bg_bot_message)
+                } else {
+                    tvMessage.setBackgroundResource(R.drawable.bg_bot_message)
+                }
             }
+
         }
     }
 
