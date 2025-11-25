@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.stressease.chats.ChatActivity
-import com.example.stressease.History.History
+import com.example.stressease.Analytics.History
 import com.example.stressease.MoodFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.example.stressease.R

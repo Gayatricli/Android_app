@@ -1,7 +1,5 @@
 package com.example.stressease.chats
 
-
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -30,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.stressease.Api.ChatRequest
 import com.example.stressease.Api.RetrofitClient
-import com.example.stressease.History.History
+import com.example.stressease.Analytics.History
 import com.example.stressease.LocalStorageOffline.SharedPreference
 import com.example.stressease.SOS.SOS
 import com.google.firebase.auth.FirebaseAuth
@@ -53,7 +51,6 @@ class ChatActivity : ComponentActivity() {
                 delay(200)
                 ready = true
             }
-
             if (ready) {
                 ChatFragmentCompose(isNewSession = intent.getBooleanExtra("isNewSession", false))
             } else {

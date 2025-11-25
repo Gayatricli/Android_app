@@ -19,7 +19,7 @@
 
         tools:targetApi="31">
         <activity
-            android:name=".LoginMain.LoginActivity"
+            android:name=".chats.ChatActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +28,7 @@
         </activity>
         <activity android:name=".Analytics.Leaderboard"
               android:exported="true"/>
-        <activity android:name=".chats.ChatActivity"
+        <activity android:name=".LoginMain.LoginActivity"
             android:exported="true"/>
         <activity android:name=".Analytics.ReportsActivity"
             android:exported="true"/>
@@ -36,10 +36,12 @@
             android:exported="true"/>
         <activity android:name=".Analytics.Summary"
             android:exported="true"/>
+        <activity android:name=".Settings.SettingsActivity"
+            android:exported="true"/>
 
         <activity android:name=".SOS.SOS"
             android:exported="true"/>
-        <activity android:name=".History.History"
+        <activity android:name=".Analytics.History"
             android:exported="true"/>
         <activity android:name=".Analytics.ResourceHub"
             android:exported="true"/>

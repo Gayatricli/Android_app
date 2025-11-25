@@ -2,17 +2,20 @@ package com.example.stressease.Analytics
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.example.stressease.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 
 class Suggestions : AppCompatActivity() {
-
     private lateinit var tvEmotion: TextView
     private lateinit var tvSummary: TextView
     private lateinit var tvMotivation: TextView
@@ -23,7 +26,7 @@ class Suggestions : AppCompatActivity() {
     private lateinit var db: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private var insightsListener: ListenerRegistration? = null
-    private var aiDataLoaded = false  // ✅ flag to confirm if Flask/Firestore data is real
+    private var aiDataLoaded = false  //  flag to confirm if Flask/Firestore data is real
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,13 +66,11 @@ class Suggestions : AppCompatActivity() {
                 Toast.makeText(this, "Error loading insights.", Toast.LENGTH_SHORT).show()
                 return@addSnapshotListener
             }
-
             if (doc == null || !doc.exists()) {
                 tvSummary.text = "No insights yet — complete a quiz to generate your AI analysis!"
                 aiDataLoaded = false
                 return@addSnapshotListener
             }
-
             val emotion = doc.getString("dominant_emotion") ?: "Neutral"
             val summary = doc.getString("summary") ?: ""
             val confidence = doc.getDouble("confidence_score") ?: 0.0
@@ -90,7 +91,6 @@ class Suggestions : AppCompatActivity() {
             Log.d("SuggestionsActivity", "✅ Loaded insights for $userId → $emotion ($confidence%)")
         }
     }
-
     private fun confirmAndSaveInsights() {
         val userId = auth.currentUser?.uid
         if (userId == null) {
@@ -122,5 +122,62 @@ class Suggestions : AppCompatActivity() {
                 Toast.makeText(this, "❌ Save failed: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.e("SuggestionsActivity", "Error saving insights", e)
             }
+    }
+}
+
+data class ChatHistoryItem(
+    val userMessage: String,
+    val botReply: String,
+    val timestamp: Long
+)
+
+class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private val VIEW_TYPE_USER = 1
+    private val VIEW_TYPE_BOT = 2
+
+    private val chatItems = mutableListOf<Pair<Int, String>>() // (viewType, message)
+
+    override fun getItemViewType(position: Int): Int = chatItems[position].first
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return if (viewType == VIEW_TYPE_USER) {
+            val view = inflater.inflate(R.layout.item_chat_user, parent, false)
+            UserViewHolder(view)
+        } else {
+            val view = inflater.inflate(R.layout.item_chat_bot, parent, false)
+            BotViewHolder(view)
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val (_, message) = chatItems[position]
+        if (holder is UserViewHolder) {
+            holder.userText.text = message
+        } else if (holder is BotViewHolder) {
+            holder.botText.text = message
+        }
+    }
+
+    override fun getItemCount(): Int = chatItems.size
+
+    fun setData(pairedChats: List<ChatHistoryItem>) {
+        chatItems.clear()
+        for (chat in pairedChats) {
+            if (chat.userMessage.isNotBlank())
+                chatItems.add(VIEW_TYPE_USER to chat.userMessage)
+            if (chat.botReply.isNotBlank())
+                chatItems.add(VIEW_TYPE_BOT to chat.botReply)
+        }
+        notifyDataSetChanged()
+    }
+
+    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val userText: TextView = itemView.findViewById(R.id.tvUserMessage)
+    }
+
+    inner class BotViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val botText: TextView = itemView.findViewById(R.id.tvBotMessage)
     }
 }

@@ -75,24 +75,5 @@ fun DataStorageScreen(navController: NavController) {
     }
 }
 
-@Composable
-fun AboutSupportScreen(navController: NavController) {
-    Scaffold { innerPadding ->
-        Column(
-            Modifier
-                .padding(innerPadding)
-                .padding(16.dp)
-        ) {
-            Text(
-                "Help • Terms • About",
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(Modifier.height(20.dp))
-            Text(
-                "Help center / Contact us / About the app",
-                style = MaterialTheme.typography.bodyLarge
-            )
-        }
-    }
-}
+
+

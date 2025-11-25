@@ -1,8 +1,10 @@
 package com.example.stressease.Analytics
 
 data class LeaderboardEntry(
-    val username: String = "",
-    val username1: String,
-    val score: Int = 0
+    val rank: String,
+    val username: String,
+    val score: Int,
+    val emoji: String,
+    val logs: Int
 )
 

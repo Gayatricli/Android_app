@@ -1,6 +1,5 @@
 package com.example.stressease.Analytics
 
-
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +11,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
 class Leaderboard : AppCompatActivity() {
+
     private lateinit var recyclerLeaderboard: RecyclerView
     private lateinit var adapter: LeaderboardAdapter
     private val leaderboardList = mutableListOf<LeaderboardEntry>()
+
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
@@ -24,33 +25,49 @@ class Leaderboard : AppCompatActivity() {
 
         recyclerLeaderboard = findViewById(R.id.recyclerLeaderboard)
         recyclerLeaderboard.layoutManager = LinearLayoutManager(this)
+
         adapter = LeaderboardAdapter(leaderboardList)
         recyclerLeaderboard.adapter = adapter
 
         loadLeaderboard()
     }
+
     private fun loadLeaderboard() {
-        db.collection("users")
-            .orderBy(
-                "score",
-                Query.Direction.DESCENDING
-            ) // sort by score
-            .limit(20) // top 20 users
+
+        db.collection("user_mood_logs")
+            .orderBy("score", Query.Direction.DESCENDING)     // must exist in each document
+            .limit(50)                                        // show top 50
             .get()
-            .addOnSuccessListener { documents ->
+            .addOnSuccessListener { snapshot ->
+
                 leaderboardList.clear()
                 var rank = 1
-                for (doc in documents) {
-                    val username = doc.getString("email") ?: "Unknown"
-                    val score = doc.getLong("score") ?: 0
-                    leaderboardList.add(LeaderboardEntry(rank.toString(), username, score.toInt()))
+
+                for (doc in snapshot.documents) {
+
+                    val username = doc.getString("username") ?: "User"
+                    val score = (doc.getLong("score") ?: 0).toInt()
+                    val emoji = doc.getString("emoji") ?: "🙂"
+                    val logs = (doc.getLong("totalLogs") ?: 0).toInt()
+
+                    leaderboardList.add(
+                        LeaderboardEntry(
+                            rank = rank.toString(),
+                            username = username,
+                            score = score,
+                            emoji = emoji,
+                            logs = logs
+                        )
+                    )
+
                     rank++
                 }
+
                 adapter.notifyDataSetChanged()
             }
             .addOnFailureListener { e ->
                 Log.e("Leaderboard", "Error fetching leaderboard", e)
             }
     }
-
 }
+
