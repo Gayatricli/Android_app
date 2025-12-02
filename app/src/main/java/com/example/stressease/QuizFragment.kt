@@ -121,8 +121,8 @@ class QuizFragment : Fragment() {
         btnBack.setOnClickListener { goBack() }
     }
 
-    private fun loadQuestionsForToday() {
-        val dayKey = when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+    private fun getDayKey(): String {
+        return when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
             Calendar.MONDAY -> "day_1"
             Calendar.TUESDAY -> "day_2"
             Calendar.WEDNESDAY -> "day_3"
@@ -131,6 +131,10 @@ class QuizFragment : Fragment() {
             Calendar.SATURDAY -> "day_6"
             else -> "day_7"
         }
+    }
+
+    private fun loadQuestionsForToday() {
+        val dayKey = getDayKey()
 
         db.collection("questions").document(dayKey).get()
             .addOnSuccessListener { doc ->
@@ -337,6 +341,7 @@ class QuizFragment : Fragment() {
                 })
                 put("dass_today", JSONObject(dassToday as Map<*, *>))
                 put("date", date)
+                put("day_key", getDayKey())
                 put("additional_notes", "Submitted via Android app")
             }
 
